@@ -17,18 +17,3 @@ export const useAdsSkipsGlobalSummaryQuery = (
     queryFn: getAdsSkipsGlobalSummary,
     ...options,
   });
-
-const getAdsSkipsMonthSummary = (): Promise<
-  Record<number, AdsSkipsummaryT>
-> => {
-  return browserClient.get(BackgroundListener.GET_ADS_SKIP_MONTH_SUMMARY);
-};
-
-export const useAdsSkipsMonthSummaryQuery = (
-  options?: UseQueryOptions<Record<number, AdsSkipsummaryT>>
-) =>
-  useQuery<Record<number, AdsSkipsummaryT>>({
-    queryKey: ["ads-skips", "summary", "month"],
-    queryFn: () => getAdsSkipsMonthSummary(),
-    ...options,
-  });

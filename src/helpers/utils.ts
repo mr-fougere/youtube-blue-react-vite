@@ -1,6 +1,6 @@
 export function getBrowserInstance(): typeof chrome {
   // Get extension api Chrome or Firefox
-  const browserInstance = window.chrome || browser;
+  const browserInstance = chrome || browser;
   return browserInstance;
 }
 export function timeConverter(seconds: number) {

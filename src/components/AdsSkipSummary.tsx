@@ -20,7 +20,7 @@ export function AdsSkipSummary({ data, isPending }: AdsSkipSummaryProps) {
   return (
     <div className="grid grid-cols-3 gap-2">
       <div className="bg-second-blue flex-1 gap-2 flex flex-col text-white items-center justify-center p-2 rounded-sm">
-        <FontAwesomeIcon icon={faBullhorn} />
+        <FontAwesomeIcon icon={faForward} />
         <div className="text-center text-xs">Skipped Ads</div>
         <div className="bg-white text-second-blue rounded-sm mx-auto font-bold w-full text-center">
           {isPending ? (
@@ -42,7 +42,7 @@ export function AdsSkipSummary({ data, isPending }: AdsSkipSummaryProps) {
         </div>
       </div>
       <div className="bg-second-blue flex-1 gap-2 flex flex-col text-white items-center justify-center p-2 rounded-sm">
-        <FontAwesomeIcon icon={faForward} />
+        <FontAwesomeIcon icon={faBullhorn} />
         <div className="text-center text-xs">Total Ads Time</div>
         <div className="bg-white text-second-blue rounded-sm mx-auto font-bold w-full text-center">
           {isPending ? (

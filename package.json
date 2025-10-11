@@ -1,7 +1,7 @@
 {
   "name": "youtube-blue",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.0.0-alpha",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "build:content": "vite build --config vite.config.content.ts",
     "build:popup": "vite build --config vite.config.popup.ts",
     "build": "rm -R dist && npm run build:background && npm run build:content && npm run build:popup",
+    "build:firefox": "web-ext build --source-dir=dist --artifacts-dir=dist",
     "lint": "eslint .",
     "preview": "vite preview",
     "watch-build": "nodemon --watch src --ext ts,tsx,js,jsx,json,html --exec npm run build"
@@ -48,6 +49,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
-    "vite-plugin-node-polyfills": "^0.22.0"
+    "vite-plugin-node-polyfills": "^0.22.0",
+    "web-ext": "^8.10.0"
   }
 }

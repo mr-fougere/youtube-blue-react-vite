@@ -38,15 +38,6 @@ const setMessageListeners = () => {
       return true;
     }
 
-    if (request.action == BackgroundListener.GET_ADS_SKIP_MONTH_SUMMARY) {
-      dbEngine.openDB().then(async () => {
-        const items = await dbEngine.getAllItems();
-
-        sendResponse(dataFormatter.formatMonthPopup(items));
-      });
-      return true;
-    }
-
     if (request.action == BackgroundListener.GET_DATABASE_STATUS) {
       sendResponse({ status: dbEngine.status });
     }
