@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "YouTubeBlue",
+  "version": "2.0.0",
+  "author": "Mr-Fougere",
+  "description": "YouTubeBlue is a browser extension with features to improve use of YouTube ",
+  "permissions": ["tabs"],
+  "icons": {
+    "48": "assets/icons/logo48.png",
+    "64": "assets/icons/logo64.png",
+    "96": "assets/icons/logo96.png",
+    "128": "assets/icons/logo128.png"
+  },
+  "action": {
+    "default_icon": {
+      "48": "assets/icons/logo48.png",
+      "64": "assets/icons/logo64.png",
+      "96": "assets/icons/logo96.png",
+      "128": "assets/icons/logo128.png"
+    },
+    "default_title": "YouTubeBlue",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["assets/styles/bluetify.css"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": { "id": "{8a2b4c6d-0e1f-9c3d-7b5e-f8a1d0c2e3f4}" }
+  }
+}
