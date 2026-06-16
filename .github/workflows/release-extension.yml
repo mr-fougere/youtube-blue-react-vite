@@ -1,0 +1,91 @@
+name: Build and Release Extension
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build extension
+        run: pnpm run build
+
+      - name: Prepare Chrome and Firefox packages
+        run: |
+          set -euo pipefail
+
+          rm -rf package
+          mkdir -p package/chrome package/firefox
+
+          cp -R dist/. package/chrome/
+          cp -R dist/. package/firefox/
+
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const patchManifest = (targetDir, browser) => {
+            const manifestPath = path.join(targetDir, 'manifest.json');
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+            if (manifest.background && manifest.background.scripts) {
+              delete manifest.background.scripts;
+            }
+
+            if (browser === 'chrome') {
+              delete manifest.browser_specific_settings;
+            }
+
+            fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+          };
+
+          patchManifest('package/chrome', 'chrome');
+          patchManifest('package/firefox', 'firefox');
+          NODE
+
+          cd package/chrome
+          zip -r "../../youtube-blue-chrome-${{ github.ref_name }}.zip" .
+          cd ../firefox
+          zip -r "../../youtube-blue-firefox-${{ github.ref_name }}.zip" .
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-zips-${{ github.ref_name }}
+          path: |
+            youtube-blue-chrome-${{ github.ref_name }}.zip
+            youtube-blue-firefox-${{ github.ref_name }}.zip
+          if-no-files-found: error
+
+      - name: Create or update GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generateReleaseNotes: true
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: youtube-blue-chrome-${{ github.ref_name }}.zip,youtube-blue-firefox-${{ github.ref_name }}.zip
