@@ -76,8 +76,8 @@ jobs:
           const manifestPath = path.join('package/firefox', 'manifest.json');
           const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
-          if (manifest.background && manifest.background.scripts) {
-            delete manifest.background.scripts;
+          if (manifest.background && manifest.background.service_worker) {
+            delete manifest.background.service_worker;
           }
 
           fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
