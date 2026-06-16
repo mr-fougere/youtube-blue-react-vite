@@ -29,21 +29,41 @@ The web extension offers features similar to YouTube Premium but for free.
 
 The freedom is symbolized by the color blue 🟦.
 
-## 🌐 Installation 
+## 🌐 Installation
 
-⚠️ Currently only available for Firefox ⚠️
+Download the latest package from GitHub Releases:
+- `youtube-blue-chrome-<version>.zip`
+- `youtube-blue-firefox-<version>.zip`
 
-1.  Install the addon
-	[Youtube Blue Link](https://addons.mozilla.org/firefox/downloads/file/4210981/25729358bec54f5883d3-0.4.0.xpi)
-	
-2. Change settings
-    - Right-Click on the YouTubeBlue Icon
-    - Go to Manage Extension and change the following settings
-        - Enable Access to YouTube data by the addon [ OBLIGATORY ]
-        - Turn On automatic updates [ OPTIONAL ]
-        - Allow Run in private windows [ OPTIONAL ]
+### Chrome (EN)
+1. Extract `youtube-blue-chrome-<version>.zip`.
+2. Open `chrome://extensions/`.
+3. Enable **Developer mode**.
+4. Click **Load unpacked**.
+5. Select the extracted folder.
 
-### 3.  🎈You ready to use YoutubeBlue !🎈
+### Chrome (FR)
+1. Décompresse `youtube-blue-chrome-<version>.zip`.
+2. Ouvre `chrome://extensions/`.
+3. Active le **mode développeur**.
+4. Clique sur **Charger l’extension non empaquetée**.
+5. Sélectionne le dossier décompressé.
+
+### Firefox (EN)
+1. Extract `youtube-blue-firefox-<version>.zip`.
+2. Open `about:debugging#/runtime/this-firefox`.
+3. Click **Load Temporary Add-on**.
+4. Select `manifest.json` from the extracted folder.
+
+### Firefox (FR)
+1. Décompresse `youtube-blue-firefox-<version>.zip`.
+2. Ouvre `about:debugging#/runtime/this-firefox`.
+3. Clique sur **Charger un module complémentaire temporaire**.
+4. Sélectionne le fichier `manifest.json` dans le dossier décompressé.
+
+### Other browsers / Autres navigateurs
+For Chromium-based browsers (Edge, Brave, Opera), use the same steps as Chrome with the Chrome ZIP.
+Pour les navigateurs basés sur Chromium (Edge, Brave, Opera), utilise les mêmes étapes que Chrome avec le ZIP Chrome.
 
 ## 🔧 Features
 
