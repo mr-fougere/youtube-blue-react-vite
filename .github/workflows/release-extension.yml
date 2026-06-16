@@ -16,16 +16,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -33,42 +34,56 @@ jobs:
       - name: Build extension
         run: pnpm run build
 
-      - name: Prepare Chrome and Firefox packages
+      - name: Prepare package directories
         run: |
           set -euo pipefail
 
           rm -rf package
           mkdir -p package/chrome package/firefox
 
+      - name: Prepare Chrome extension package
+        run: |
+          set -euo pipefail
+
           cp -R dist/. package/chrome/
+
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const manifestPath = path.join('package/chrome', 'manifest.json');
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+          if (manifest.background && manifest.background.scripts) {
+            delete manifest.background.scripts;
+          }
+          delete manifest.browser_specific_settings;
+
+          fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+          NODE
+
+          cd package/chrome
+          zip -r "../../youtube-blue-chrome-${{ github.ref_name }}.zip" .
+
+      - name: Prepare Firefox extension package
+        run: |
+          set -euo pipefail
+
           cp -R dist/. package/firefox/
 
           node <<'NODE'
           const fs = require('fs');
           const path = require('path');
+          const manifestPath = path.join('package/firefox', 'manifest.json');
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
-          const patchManifest = (targetDir, browser) => {
-            const manifestPath = path.join(targetDir, 'manifest.json');
-            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+          if (manifest.background && manifest.background.scripts) {
+            delete manifest.background.scripts;
+          }
 
-            if (manifest.background && manifest.background.scripts) {
-              delete manifest.background.scripts;
-            }
-
-            if (browser === 'chrome') {
-              delete manifest.browser_specific_settings;
-            }
-
-            fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-          };
-
-          patchManifest('package/chrome', 'chrome');
-          patchManifest('package/firefox', 'firefox');
+          fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
           NODE
 
-          cd package/chrome
-          zip -r "../../youtube-blue-chrome-${{ github.ref_name }}.zip" .
-          cd ../firefox
+          cd package/firefox
           zip -r "../../youtube-blue-firefox-${{ github.ref_name }}.zip" .
 
       - name: Upload build artifacts
