@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export function Footer() {
   return (
     <footer className="flex-1 flex flex-row bg-header text-xs justify-between items-center opacity-50 p-2 gap-2 border-t-disabled border-t-2">
-      <span>{__APP_VERSION__}</span>
+      <span>V.{__APP_VERSION__}</span>
       <a
         href="https://github.com/Mr-Fougere/YoutubeBlue"
         target="_blank"

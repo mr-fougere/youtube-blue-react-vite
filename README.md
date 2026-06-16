@@ -54,7 +54,7 @@ The freedom is symbolized by the color blue 🟦.
 - ### 📈 Dashboard [ STABLE ]
 	- You can find your stats in the extension popup 
 
-- ### ⚙️ Auto resolution reducer [ Needs Improvement ]
+- ### ⚙️ Auto resolution reducer [ IN PROGRESS ]
 	- You can enable/disable the feature in the video settings menu
 	- When you are not on the YouTube video for 5s, the quality decreases to 144P
 	- When you come back to the YouTube video for more than 2s, it reapplies your previous quality.

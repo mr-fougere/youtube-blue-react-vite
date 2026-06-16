@@ -1,4 +1,4 @@
-import { AdsSkipper } from "@/classes/ads-skipper";
+import { AdsSkipper } from "@/services/ads-skipper";
 
 const adsSkipper = new AdsSkipper();
 
@@ -19,10 +19,7 @@ const setupVariables = (player: HTMLDivElement) => {
   adsSkipper.setPlayers(moviePlayer, videoPlayer);
 };
 
-const mutationCallback = (
-  mutations: MutationRecord[],
-  _observer: MutationObserver
-) => {
+const mutationCallback = (mutations: MutationRecord[]) => {
   for (const mutation of mutations) {
     const target = mutation.target as HTMLElement;
     if (target.id == "movie_player") {

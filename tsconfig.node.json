@@ -18,5 +18,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.background.ts", "vite.config.content.ts"]
+  "include": ["config/vite.config.background.ts","config/vite.config.content.ts"]
 }

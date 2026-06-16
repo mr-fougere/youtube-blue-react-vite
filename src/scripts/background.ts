@@ -1,5 +1,5 @@
-import { DataFormatter } from "@/classes/data-formatter";
-import { DataInjector } from "@/classes/data-injector";
+import { DataFormatter } from "@/services/data-formatter";
+import { DataInjector } from "@/services/data-injector";
 import { DatabaseEngine } from "@/database/engine";
 import { getBrowserInstance } from "@/helpers/utils";
 import { BackgroundListener } from "@/shared/listener.constant";
@@ -17,14 +17,11 @@ const setup = async () => {
   } finally {
     dbEngine.closeDB();
   }
-  console.log("db setup");
 };
 
 const setMessageListeners = () => {
   const browser = getBrowserInstance();
   browser.runtime.onMessage.addListener((request, _sender, sendResponse) => {
-    console.log(request);
-
     if (request.action == BackgroundListener.ADD_NEW_ADS_SKIP) {
       dataInjector.add(request.data, "ads-skip");
     }

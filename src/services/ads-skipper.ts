@@ -5,8 +5,8 @@ import { BackgroundListener } from "@/shared/listener.constant";
 const ADS_MODULE_CLASSES = ".video-ads.ytp-ad-module";
 const ADS_PREVIEW_CLASSES =
   ".ytp-ad-player-overlay-layout__skip-or-preview-container";
-const DEFAULT_AD_TIME = 5; // in seconds
-const SKIP_AD_BUTTON = ".ytp-skip-ad-button";
+//const DEFAULT_AD_TIME = 5; // in seconds
+//const SKIP_AD_BUTTON = ".ytp-skip-ad-button";
 
 export class AdsSkipper {
   private adModule: HTMLDivElement | null = null;

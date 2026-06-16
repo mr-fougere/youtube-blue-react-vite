@@ -6,14 +6,14 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": path.resolve(__dirname, "../src"),
     },
   },
   build: {
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        content: "src/scripts/content.ts",
+        background: "src/scripts/background.ts",
       },
       output: {
         entryFileNames: "[name].js",

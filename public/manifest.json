@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YouTubeBlue",
-  "version": "2.0.0-alpha",
+  "version": "0.2.1",
   "author": "Mr-Fougere",
   "description": "YouTubeBlue is a browser extension with features to improve use of YouTube ",
   "permissions": ["tabs"],
@@ -19,7 +19,7 @@
       "128": "assets/icons/logo128.png"
     },
     "default_title": "YouTubeBlue",
-    "default_popup": "popup.html"
+    "default_popup": "src/popup.html"
   },
   "background": {
     "scripts": ["background.js"],

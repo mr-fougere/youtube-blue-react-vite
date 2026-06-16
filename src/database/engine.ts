@@ -59,7 +59,7 @@ export class DatabaseEngine {
   async getItems<T>(
     tableName: string,
     indexName: string,
-    value: any
+    value: IDBValidKey | IDBKeyRange
   ): Promise<T[] | null> {
     return new Promise((resolve, reject) => {
       if (!this.db) {
@@ -88,7 +88,7 @@ export class DatabaseEngine {
   }
 
   // Récupérer tous les éléments
-  async getAllItems(): Promise<any[]> {
+  async getAllItems(): Promise<DataType[]> {
     return new Promise((resolve, reject) => {
       if (!this.db) {
         reject("Base de données non ouverte");
@@ -99,7 +99,7 @@ export class DatabaseEngine {
         this.db.objectStoreNames,
         "readonly"
       );
-      let records: any[] = [];
+      const records: DataType[][] = [];
 
       transaction.oncomplete = () => {
         resolve(records.flat());
@@ -118,7 +118,7 @@ export class DatabaseEngine {
         const request = objectStore.getAll();
 
         request.onsuccess = (event) => {
-          records.push((event.target as IDBRequest).result);
+          records.push((event.target as IDBRequest<DataType[]>).result);
         };
       });
     });
@@ -287,17 +287,11 @@ export class DatabaseEngine {
     });
   }
 
-  async createTables() {
-    return new Promise(async (resolve, reject) => {
-      if (!this) {
-        reject(false);
-        return;
-      }
+  async createTables(): Promise<boolean> {
+    for (const table of [AdsSkipEntity]) {
+      await this.updateVersionAndCreateTable(table.name, table.config);
+    }
 
-      for (const table of [AdsSkipEntity]) {
-        await this.updateVersionAndCreateTable(table.name, table.config);
-      }
-      resolve(true);
-    });
+    return true;
   }
 }

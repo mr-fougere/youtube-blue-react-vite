@@ -1,7 +1,7 @@
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
-import packageJson from "./package.json";
+import packageJson from "../package.json";
 
 export default defineConfig({
   define: {
@@ -10,14 +10,14 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": path.resolve(__dirname, "../src"),
     },
   },
   build: {
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        popup: "popup.html",
+        popup: "src/popup.html",
       },
       output: {
         entryFileNames: "[name].js",

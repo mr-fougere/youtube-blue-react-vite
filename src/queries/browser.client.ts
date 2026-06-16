@@ -10,7 +10,7 @@ export class BrowserClient {
     });
   }
 
-  post(backgroundListener: BackgroundListener, data: Record<any, any>) {
+  async post(backgroundListener: BackgroundListener, data: Record<string, unknown>) {
     return this.browser.runtime.sendMessage({
       action: backgroundListener,
       data,
