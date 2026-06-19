@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="flex-1 flex flex-row bg-header text-xs justify-between items-center opacity-50 p-2 gap-2 border-t-disabled border-t-2">
       <span>V.{__APP_VERSION__}</span>
       <a
-        href="https://github.com/Mr-Fougere/YoutubeBlue"
+        href="https://github.com/mr-fougere/youtube-blue-react-vite"
         target="_blank"
         className="flex flex-row  gap-1 items-center"
       >
