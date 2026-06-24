@@ -68,7 +68,7 @@ Pour les navigateurs basés sur Chromium (Edge, Brave, Opera), utilise les même
 ## 🔧 Features
 
 - ### 📣 Auto skip ads [ STABLE ]
-	- - You can enable/disable the feature with the key 'A'
+	- You can enable/disable the feature with the key 'A'
 	- You can see the current state in the video settings bar
 	 
 - ### 📈 Dashboard [ STABLE ]
